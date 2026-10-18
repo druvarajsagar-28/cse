@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="EYE AI is a camera-based smart vision assistant prototype.">
+  <title>EYE AI — Smart Vision Assistant</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/" aria-label="EYE AI home"><span class="brand-icon">◉</span> EYE<span>AI</span></a>
+  <span class="prototype-tag">CAMERA-BASED PROTOTYPE</span>
+</header>
+<main class="layout">
+  <section class="hero">
+    <div class="eyebrow"><span class="pulse"></span> YOUR AI VISION ASSISTANT</div>
+    <h1>See it.<br><span>Understand it.</span></h1>
+    <p class="hero-copy">Scan objects, read text, and ask questions about what you see — all from your camera.</p>
+    <div class="notice">🔒 Images are processed only when you click Analyze. Configure an AI key for image understanding.</div>
+  </section>
+
+  <section class="workspace">
+    <div class="panel scanner">
+      <div class="panel-heading">
+        <div><div class="eyebrow">01 / SCAN</div><h2>Capture an image</h2></div>
+        <span class="camera-symbol">⌗</span>
+      </div>
+      <div class="camera-area" id="cameraArea">
+        <video id="video" autoplay playsinline hidden></video>
+        <img id="preview" alt="Image selected for scanning" hidden>
+        <div class="camera-placeholder" id="placeholder">
+          <div class="scan-orbit"><span>◉</span></div>
+          <strong>Your view starts here</strong>
+          <small>Start your camera or upload an image</small>
+        </div>
+        <div class="camera-actions">
+          <button class="button secondary" id="startCamera">Start camera</button>
+          <label class="button secondary upload-button">Upload image<input type="file" id="imageFile" accept="image/png,image/jpeg,image/webp" hidden></label>
+          <button class="button secondary" id="capture" disabled>Capture</button>
+        </div>
+      </div>
+      <label class="field-label" for="scanQuestion">What would you like to know? <span>(optional)</span></label>
+      <input class="text-input" id="scanQuestion" placeholder="e.g. What is this? Explain the text..." maxlength="500">
+      <button class="button primary full" id="analyze">✦ Analyze with AI</button>
+      <p class="hint">PNG, JPG, JPEG or WEBP · Maximum 8 MB</p>
+    </div>
+
+    <div class="panel results">
+      <div class="panel-heading">
+        <div><div class="eyebrow">02 / UNDERSTAND</div><h2>AI results</h2></div>
+        <span class="result-status" id="resultStatus">READY</span>
+      </div>
+      <div class="result-content" id="resultContent" aria-live="polite">
+        <div class="empty-state"><div class="sparkle">✧</div><h3>Waiting for your scan</h3><p>Your description, extracted text, or answer will appear here.</p></div>
+      </div>
+      <div class="result-footer"><button class="button secondary" id="speak" disabled>🔊 Read aloud</button><button class="button secondary" id="stopSpeak" disabled>Stop audio</button></div>
+    </div>
+  </section>
+
+  <section class="panel ask-panel">
+    <div class="panel-heading"><div><div class="eyebrow">03 / ASK</div><h2>Ask a question</h2></div><span class="ask-icon">✳</span></div>
+    <form id="askForm" class="ask-form"><input class="text-input" id="question" placeholder="Ask anything, or paste a maths / study question..." maxlength="1500" required><button class="button primary" type="submit">Ask AI ↗</button></form>
+    <div id="askResult" class="ask-result" aria-live="polite"></div>
+  </section>
+
+  <section class="panel history-panel">
+    <div class="panel-heading"><div><div class="eyebrow">04 / RECENT ACTIVITY</div><h2>Your scan history</h2></div><button class="button secondary" id="refreshHistory">Refresh</button></div>
+    <div id="historyList" class="history-list"><p class="muted">Loading history…</p></div>
+  </section>
+
+  <footer><span>EYE AI <b>·</b> Student project prototype</span><span>Not a medical device. Do not use homemade electronics in or on the eye.</span></footer>
+</main>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
